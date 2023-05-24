@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl8w3065veic8"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_nqsnf"]
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_nqsnf")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.227451, 0.145098, 1)
+polygon = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(2.98023e-08, 2.98023e-08)
+scale = Vector2(1.03125, 1.03125)
+polygon = PackedVector2Array(0, -10, -10, 0, 0, 10, 10, 0)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

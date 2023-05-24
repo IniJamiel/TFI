@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2c3xc7u2pg4t"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_8ytvx"]
+[ext_resource type="PackedScene" uid="uid://c1a4rq34yr0p2" path="res://Player.tscn" id="1_yu5jv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qd78n"]
+size = Vector2(51, 860)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ydou"]
+size = Vector2(534, 20)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_8ytvx")
+
+[node name="Player" parent="." instance=ExtResource("1_yu5jv")]
+position = Vector2(34, 702)
+
+[node name="TembokSamping" type="StaticBody2D" parent="." groups=["Samping"]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TembokSamping"]
+position = Vector2(-26, 400)
+shape = SubResource("RectangleShape2D_qd78n")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TembokSamping"]
+position = Vector2(476, 409)
+shape = SubResource("RectangleShape2D_qd78n")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Anchor1" type="Node2D" parent="."]
+position = Vector2(14, 15)
+
+[node name="Anchor2" type="Node2D" parent="."]
+position = Vector2(432, 14)
+
+[node name="Bawah" type="StaticBody2D" parent="." groups=["Bawah"]]
+
+[node name="Atas" type="CollisionShape2D" parent="Bawah"]
+position = Vector2(215, -11)
+shape = SubResource("RectangleShape2D_3ydou")
+
+[node name="Atas2" type="CollisionShape2D" parent="Bawah"]
+position = Vector2(226, 811)
+shape = SubResource("RectangleShape2D_3ydou")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 451.0
+offset_bottom = 54.0
+size_flags_horizontal = 4
+text = "Level: "
+
+[node name="LabelKalah" type="Label" parent="."]
+visible = false
+offset_left = -1.0
+offset_top = 330.0
+offset_right = 447.0
+offset_bottom = 478.0
+text = "Score Akhir = "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerKalah" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerKalah" to="." method="_on_timer_kalah_timeout"]
