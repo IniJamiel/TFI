@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7fx64um0qud6"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_mlclt"]
+[ext_resource type="PackedScene" uid="uid://bd8h2qj7wgm8" path="res://player.tscn" id="1_nidcu"]
+[ext_resource type="PackedScene" uid="uid://1gmkycn78u8u" path="res://bullet.tscn" id="2_byw1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yw2k"]
+size = Vector2(487, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5hvb"]
+size = Vector2(97, 883)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_mlclt")
+
+[node name="AtasBawah" type="StaticBody2D" parent="." groups=["Bawah"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AtasBawah"]
+position = Vector2(224, -12)
+shape = SubResource("RectangleShape2D_4yw2k")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AtasBawah"]
+position = Vector2(230, 798)
+shape = SubResource("RectangleShape2D_4yw2k")
+
+[node name="Samping" type="StaticBody2D" parent="." groups=["Samping"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Samping"]
+position = Vector2(-43, 398)
+shape = SubResource("RectangleShape2D_k5hvb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Samping"]
+position = Vector2(491, 394)
+shape = SubResource("RectangleShape2D_k5hvb")
+
+[node name="Player" parent="." instance=ExtResource("1_nidcu")]
+position = Vector2(30, 722)
+
+[node name="Bullet" parent="." instance=ExtResource("2_byw1h")]
+position = Vector2(49, 39)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="AnchorKanan" type="Node2D" parent="."]
+position = Vector2(427, 16)
+
+[node name="AnchorKiri" type="Node2D" parent="."]
+position = Vector2(23, 17)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 50.0
+offset_bottom = 26.0
+text = "Level: "
+
+[node name="LabelKalah" type="Label" parent="."]
+visible = false
+offset_left = 121.0
+offset_top = 383.0
+offset_right = 238.0
+offset_bottom = 409.0
+text = "Score Terakhir:"
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

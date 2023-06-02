@@ -20,8 +20,10 @@ func _on_timer_timeout():
 
 
 func _on_timer_kalah_timeout():
+	Global.level = 1
 	get_tree().reload_current_scene()
 
 func kalah():
 	$LabelKalah.visible = true
+	$LabelKalah.text = "Score Akhir = " + str(Global.level)
 	$TimerKalah.start()
